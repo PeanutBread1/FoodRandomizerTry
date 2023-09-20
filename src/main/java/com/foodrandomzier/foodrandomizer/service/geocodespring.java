@@ -23,5 +23,18 @@ public class geocodespring {
         else{
             return null;
         }
+
+    }
+    public static String geoCodeId(String input) {
+        GeoApiContext context = new GeoApiContext.Builder().apiKey(placesAPI).build();
+        GeoApiContext context2 = new GeoApiContext.Builder().apiKey(apiKey).build();
+        GeocodingApiRequest geocodeRequest = GeocodingApi.geocode(context2, input);
+        GeocodingResult geocodeResult[] = geocodeRequest.awaitIgnoreError();
+        if (geocodeResult != null && geocodeResult.length > 0) {
+
+            return geocodeResult[0].placeId;
+        } else {
+            return null;
+        }
     }
 }

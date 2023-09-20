@@ -2,6 +2,7 @@ package com.foodrandomzier.foodrandomizer.service;
 
 import com.google.maps.GeoApiContext;
 import com.google.maps.NearbySearchRequest;
+import com.google.maps.PlaceDetailsRequest;
 import com.google.maps.PlacesApi;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.*;
@@ -74,19 +75,26 @@ public class NearbySearch {
         PlaceDetails randomResult = results.get(random.nextInt(results.size()));
         return randomResult;
     }
+
     public static List<PlaceDetails> fetchPlaceDetails(List<PlacesSearchResult> searchResults, GeoApiContext context) {
         List<PlaceDetails> placeDetailsList = new ArrayList<>();
 
         for (PlacesSearchResult searchResult : searchResults) {
             try {
-                PlaceDetails placeDetails = PlacesApi.placeDetails(context, searchResult.placeId).await();
+                PlaceDetailsRequest request = PlacesApi.placeDetails(context, searchResult.placeId);
 
-                // Add the retrieved PlaceDetails to the list
+                request.fields(Arrays.stream(PlaceDetailsRequest.FieldMask.values())
+                        .filter(x -> x != PlaceDetailsRequest.FieldMask.SECONDARY_OPENING_HOURS)
+                        .toArray(PlaceDetailsRequest.FieldMask[]::new));
+
+                PlaceDetails placeDetails = request.await();
                 placeDetailsList.add(placeDetails);
             } catch (Exception e) {
                 e.printStackTrace();
                 // Handle the exception, if needed
             }
+
+//            return null;
         }
 
         return placeDetailsList;
@@ -98,7 +106,7 @@ public class NearbySearch {
         PriceLevel minpricelevel = priceLevelSelector.choosePriceLevel(minprice);
 
         for (PlaceDetails result : results) {
-            if (result.priceLevel != null && result.priceLevel.compareTo(minpricelevel) >= 0) {
+                if (result.priceLevel != null && result.priceLevel.compareTo(minpricelevel) >= 0) {
                 filteredResults.add(result);
             }
         }

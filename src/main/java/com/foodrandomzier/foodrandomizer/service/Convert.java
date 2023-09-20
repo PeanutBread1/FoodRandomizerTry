@@ -11,6 +11,8 @@ public class Convert {
         restaurant.setRating(placeDetails.rating);
         restaurant.setAddress(placeDetails.formattedAddress);
         restaurant.setPlaceid(placeDetails.placeId);
+        restaurant.setPriceLevel(placeDetails.priceLevel);
+        restaurant.setPriceLevelNum(placeDetails.priceLevel.ordinal());
         // Set other fields as needed
         return restaurant;
     }
