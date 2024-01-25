@@ -1,15 +1,11 @@
-    package com.foodrandomzier.foodrandomizer.model;
+package com.foodrandomzier.foodrandomizer.model;
 
-    import com.google.maps.model.PriceLevel;
-    import jakarta.persistence.Entity;
-    import jakarta.persistence.GeneratedValue;
-    import jakarta.persistence.GenerationType;
-    import jakarta.persistence.Id;
+import com.google.maps.model.PriceLevel;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.stereotype.Component;
 
-    @Entity
-    public class Restaurant {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Component
+public class Restaurant {
 
         private Long id;
         private String name;
@@ -98,6 +94,8 @@
         public void setPhoto(String photo) {
             this.photo = photo;
         }
+
+
 
         // Other methods if needed
     }

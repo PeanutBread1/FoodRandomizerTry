@@ -1,9 +1,11 @@
 package com.foodrandomzier.foodrandomizer.service;
 
 import com.google.maps.model.PriceLevel;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PriceLevelSelector {
-    public static PriceLevel choosePriceLevel(int priceLevelCode) {
+    public PriceLevel choosePriceLevel(int priceLevelCode) {
         // Convert the priceLevelCode to the corresponding PriceLevel enum
         // and return the selected PriceLevel.
         switch (priceLevelCode) {
