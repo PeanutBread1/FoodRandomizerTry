@@ -76,7 +76,7 @@
             if (restaurant != null) {
                 restaurantService.saveRestaurant(restaurant);
                 session.removeAttribute("selectedRestaurant");
-                return ResponseEntity.ok.build;
+                return ResponseEntity.ok().build();
             }else {
                 return ResponseEntity.badRequest().body(null);
             }
