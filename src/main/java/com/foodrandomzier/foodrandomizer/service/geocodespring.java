@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class geocodespring {
-    private String apiKey = "AIzaSyCndYeOmtgBv0oJ2fT5AzzrXff1Hg1y_vo";
-    private String placesAPI = "AIzaSyB0JeyNXsZWbmZ_wZ46A2KqJXdCgVNrJJM";
+    private String apiKey = "";
+    private String placesAPI = "";
     public LatLng geoCode(String input) {
         GeoApiContext context2 = new GeoApiContext.Builder().apiKey(apiKey).build();
         GeocodingApiRequest geocodeRequest = GeocodingApi.geocode(context2, input);
